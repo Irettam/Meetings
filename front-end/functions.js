@@ -40,7 +40,8 @@ function conexion(controller, action, param) {
 	param["user"] = "1";
     return $.ajax({
         type: "GET",
-        url: 'http://localhost:31093/HelloWorldApplication/webresources/Conexion/' + JSON.stringify(param),
+        //url: 'http://localhost:4040/HelloWorldApplication/webresources/Conexion/' + JSON.stringify(param),
+        url: 'http://localhost:4040/Meetings/webresources/Conexion/' + JSON.stringify(param),
         success: function(data){
         	return data;
         },

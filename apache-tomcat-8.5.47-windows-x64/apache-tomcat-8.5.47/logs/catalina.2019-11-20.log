@@ -1,0 +1,202 @@
+20-Nov-2019 20:15:06.521 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Nombre de la versión del servidor:   Apache Tomcat/8.5.47
+
+20-Nov-2019 20:15:06.525 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server built:          Oct 7 2019 13:30:46 UTC
+20-Nov-2019 20:15:06.525 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Número de versión de servidor:         8.5.47.0
+20-Nov-2019 20:15:06.525 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log OS Name:               Windows 10
+20-Nov-2019 20:15:06.525 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Versión de Systema Operativo:      10.0
+
+20-Nov-2019 20:15:06.526 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Arquitectura:          amd64
+
+20-Nov-2019 20:15:06.526 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Java Home:             C:\Program Files\Java\jdk-13.0.1
+20-Nov-2019 20:15:06.526 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM Version:           13.0.1+9
+20-Nov-2019 20:15:06.526 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Vededor JVM:     Oracle Corporation
+20-Nov-2019 20:15:06.526 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_BASE:         C:\Users\Antonio\Desktop\Meetings\apache-tomcat-8.5.47-windows-x64\apache-tomcat-8.5.47
+20-Nov-2019 20:15:06.526 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_HOME:         C:\Users\Antonio\Desktop\Meetings\apache-tomcat-8.5.47-windows-x64\apache-tomcat-8.5.47
+20-Nov-2019 20:15:06.527 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: --add-opens=java.base/java.lang=ALL-UNNAMED
+20-Nov-2019 20:15:06.527 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: --add-opens=java.base/java.io=ALL-UNNAMED
+20-Nov-2019 20:15:06.528 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: --add-opens=java.rmi/sun.rmi.transport=ALL-UNNAMED
+20-Nov-2019 20:15:06.528 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.util.logging.config.file=C:\Users\Antonio\Desktop\Meetings\apache-tomcat-8.5.47-windows-x64\apache-tomcat-8.5.47\conf\logging.properties
+20-Nov-2019 20:15:06.528 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager
+20-Nov-2019 20:15:06.528 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dhttp.nonProxyHosts=localhost|127.0.0.1|DESKTOP-2M9P10F
+20-Nov-2019 20:15:06.528 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djdk.tls.ephemeralDHKeySize=2048
+20-Nov-2019 20:15:06.528 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.protocol.handler.pkgs=org.apache.catalina.webresources
+20-Nov-2019 20:15:06.528 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dignore.endorsed.dirs=
+20-Nov-2019 20:15:06.528 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dcatalina.base=C:\Users\Antonio\Desktop\Meetings\apache-tomcat-8.5.47-windows-x64\apache-tomcat-8.5.47
+20-Nov-2019 20:15:06.528 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dcatalina.home=C:\Users\Antonio\Desktop\Meetings\apache-tomcat-8.5.47-windows-x64\apache-tomcat-8.5.47
+20-Nov-2019 20:15:06.528 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.io.tmpdir=C:\Users\Antonio\Desktop\Meetings\apache-tomcat-8.5.47-windows-x64\apache-tomcat-8.5.47\temp
+20-Nov-2019 20:15:06.529 INFO [main] org.apache.catalina.core.AprLifecycleListener.lifecycleEvent Cargada la biblioteca nativa APR de Apache Tomcat [1.2.23] con la versión APR [1.7.0].
+20-Nov-2019 20:15:06.529 INFO [main] org.apache.catalina.core.AprLifecycleListener.lifecycleEvent Capacidades APR: IPv6 [true], enviar fichero [true], aceptar filtros [false], aleatorio [true].
+20-Nov-2019 20:15:06.529 INFO [main] org.apache.catalina.core.AprLifecycleListener.lifecycleEvent APR/OpenSSL configuration: useAprConnector [false], useOpenSSL [true]
+20-Nov-2019 20:15:06.538 INFO [main] org.apache.catalina.core.AprLifecycleListener.initializeSSL OpenSSL inicializado correctamente [OpenSSL 1.1.1c  28 May 2019]
+20-Nov-2019 20:15:06.604 INFO [main] org.apache.coyote.AbstractProtocol.init Inicializando el manejador de protocolo ["http-nio-7070"]
+
+20-Nov-2019 20:15:06.779 INFO [main] org.apache.tomcat.util.net.NioSelectorPool.getSharedSelector Using a shared selector for servlet write/read
+20-Nov-2019 20:15:06.793 INFO [main] org.apache.coyote.AbstractProtocol.init Inicializando el manejador de protocolo ["ajp-nio-8009"]
+
+20-Nov-2019 20:15:06.798 SEVERE [main] org.apache.catalina.core.StandardService.initInternal No pude inicializar el conector [Connector[AJP/1.3-8009]]
+	org.apache.catalina.LifecycleException: Falló la inicialización del manejador de protocolo
+		at org.apache.catalina.connector.Connector.initInternal(Connector.java:995)
+		at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:136)
+		at org.apache.catalina.core.StandardService.initInternal(StandardService.java:552)
+		at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:136)
+		at org.apache.catalina.core.StandardServer.initInternal(StandardServer.java:848)
+		at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:136)
+		at org.apache.catalina.startup.Catalina.load(Catalina.java:639)
+		at org.apache.catalina.startup.Catalina.load(Catalina.java:662)
+		at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+		at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+		at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+		at java.base/java.lang.reflect.Method.invoke(Method.java:567)
+		at org.apache.catalina.startup.Bootstrap.load(Bootstrap.java:309)
+		at org.apache.catalina.startup.Bootstrap.main(Bootstrap.java:492)
+	Caused by: java.net.BindException: Address already in use: bind
+		at java.base/sun.nio.ch.Net.bind0(Native Method)
+		at java.base/sun.nio.ch.Net.bind(Net.java:469)
+		at java.base/sun.nio.ch.Net.bind(Net.java:458)
+		at java.base/sun.nio.ch.ServerSocketChannelImpl.bind(ServerSocketChannelImpl.java:220)
+		at java.base/sun.nio.ch.ServerSocketAdaptor.bind(ServerSocketAdaptor.java:88)
+		at org.apache.tomcat.util.net.NioEndpoint.bind(NioEndpoint.java:219)
+		at org.apache.tomcat.util.net.AbstractEndpoint.init(AbstractEndpoint.java:1118)
+		at org.apache.tomcat.util.net.AbstractJsseEndpoint.init(AbstractJsseEndpoint.java:224)
+		at org.apache.coyote.AbstractProtocol.init(AbstractProtocol.java:581)
+		at org.apache.catalina.connector.Connector.initInternal(Connector.java:993)
+		... 13 more
+20-Nov-2019 20:15:06.801 INFO [main] org.apache.catalina.startup.Catalina.load Initialization processed in 625 ms
+20-Nov-2019 20:15:06.908 INFO [main] org.apache.catalina.core.StandardService.startInternal Arrancando servicio [Catalina]
+20-Nov-2019 20:15:06.909 INFO [main] org.apache.catalina.core.StandardEngine.startInternal Starting Servlet Engine: Apache Tomcat/8.5.47
+20-Nov-2019 20:15:06.956 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Desplegando el directorio [C:\Users\Antonio\Desktop\Meetings\apache-tomcat-8.5.47-windows-x64\apache-tomcat-8.5.47\webapps\docs] de la aplicación web
+20-Nov-2019 20:15:07.456 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [C:\Users\Antonio\Desktop\Meetings\apache-tomcat-8.5.47-windows-x64\apache-tomcat-8.5.47\webapps\docs] has finished in [499] ms
+20-Nov-2019 20:15:07.457 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Desplegando el directorio [C:\Users\Antonio\Desktop\Meetings\apache-tomcat-8.5.47-windows-x64\apache-tomcat-8.5.47\webapps\examples] de la aplicación web
+20-Nov-2019 20:15:08.537 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [C:\Users\Antonio\Desktop\Meetings\apache-tomcat-8.5.47-windows-x64\apache-tomcat-8.5.47\webapps\examples] has finished in [1.080] ms
+20-Nov-2019 20:15:08.538 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Desplegando el directorio [C:\Users\Antonio\Desktop\Meetings\apache-tomcat-8.5.47-windows-x64\apache-tomcat-8.5.47\webapps\host-manager] de la aplicación web
+20-Nov-2019 20:15:08.581 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [C:\Users\Antonio\Desktop\Meetings\apache-tomcat-8.5.47-windows-x64\apache-tomcat-8.5.47\webapps\host-manager] has finished in [43] ms
+20-Nov-2019 20:15:08.581 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Desplegando el directorio [C:\Users\Antonio\Desktop\Meetings\apache-tomcat-8.5.47-windows-x64\apache-tomcat-8.5.47\webapps\manager] de la aplicación web
+20-Nov-2019 20:15:08.611 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [C:\Users\Antonio\Desktop\Meetings\apache-tomcat-8.5.47-windows-x64\apache-tomcat-8.5.47\webapps\manager] has finished in [29] ms
+20-Nov-2019 20:15:08.611 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Desplegando el directorio [C:\Users\Antonio\Desktop\Meetings\apache-tomcat-8.5.47-windows-x64\apache-tomcat-8.5.47\webapps\ROOT] de la aplicación web
+20-Nov-2019 20:15:08.643 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [C:\Users\Antonio\Desktop\Meetings\apache-tomcat-8.5.47-windows-x64\apache-tomcat-8.5.47\webapps\ROOT] has finished in [32] ms
+20-Nov-2019 20:15:08.646 INFO [main] org.apache.coyote.AbstractProtocol.start Starting ProtocolHandler ["http-nio-7070"]
+20-Nov-2019 20:15:08.660 INFO [main] org.apache.catalina.startup.Catalina.start Server startup in 1859 ms
+20-Nov-2019 20:15:16.586 INFO [http-nio-7070-exec-9] org.apache.catalina.startup.HostConfig.undeploy Repliegue (undeploy) de la aplicación web que tiene como trayectoria de contexto []
+20-Nov-2019 20:15:16.614 INFO [http-nio-7070-exec-4] org.apache.catalina.startup.HostConfig.deployDescriptor Desplieque del descriptor de configuración [C:\Users\Antonio\Desktop\Meetings\apache-tomcat-8.5.47-windows-x64\apache-tomcat-8.5.47\conf\Catalina\localhost\ROOT.xml]
+20-Nov-2019 20:15:17.309 INFO [http-nio-7070-exec-4] org.apache.jasper.servlet.TldScanner.scanJars Al menos un JAR, que se ha explorado buscando TLDs, aún no contenía TLDs. Activar historial de depuración para este historiador para una completa lista de los JARs que fueron explorados y de los que nos se halló TLDs. Saltarse JARs no necesarios durante la exploración puede dar lugar a una mejora de tiempo significativa en el arranque y compilación de JSP .
+20-Nov-2019 20:15:17.628 INFO [http-nio-7070-exec-4] org.apache.catalina.startup.HostConfig.deployDescriptor Deployment of deployment descriptor [C:\Users\Antonio\Desktop\Meetings\apache-tomcat-8.5.47-windows-x64\apache-tomcat-8.5.47\conf\Catalina\localhost\ROOT.xml] has finished in [1.015] ms
+20-Nov-2019 20:15:17.633 INFO [http-nio-7070-exec-7] org.apache.catalina.util.LifecycleBase.start The start() method was called on component [StandardEngine[Catalina].StandardHost[localhost].StandardContext[]] after start() had already been called. The second call will be ignored.
+20-Nov-2019 20:15:18.347 INFO [http-nio-7070-exec-1] org.apache.catalina.core.StandardContext.reload Ha comenzado la recarga de Contexto []
+20-Nov-2019 20:15:19.033 INFO [http-nio-7070-exec-1] org.apache.jasper.servlet.TldScanner.scanJars Al menos un JAR, que se ha explorado buscando TLDs, aún no contenía TLDs. Activar historial de depuración para este historiador para una completa lista de los JARs que fueron explorados y de los que nos se halló TLDs. Saltarse JARs no necesarios durante la exploración puede dar lugar a una mejora de tiempo significativa en el arranque y compilación de JSP .
+20-Nov-2019 20:15:19.368 INFO [http-nio-7070-exec-1] org.apache.catalina.core.StandardContext.reload Se ha completado la recarga de este Contexto
+20-Nov-2019 20:24:31.537 INFO [http-nio-7070-exec-22] org.apache.catalina.core.StandardContext.reload Ha comenzado la recarga de Contexto []
+20-Nov-2019 20:24:32.328 INFO [http-nio-7070-exec-22] org.apache.jasper.servlet.TldScanner.scanJars Al menos un JAR, que se ha explorado buscando TLDs, aún no contenía TLDs. Activar historial de depuración para este historiador para una completa lista de los JARs que fueron explorados y de los que nos se halló TLDs. Saltarse JARs no necesarios durante la exploración puede dar lugar a una mejora de tiempo significativa en el arranque y compilación de JSP .
+20-Nov-2019 20:24:32.609 INFO [http-nio-7070-exec-22] org.apache.catalina.core.StandardContext.reload Se ha completado la recarga de este Contexto
+20-Nov-2019 20:24:38.690 INFO [http-nio-7070-exec-23] org.apache.catalina.core.StandardContext.reload Ha comenzado la recarga de Contexto []
+20-Nov-2019 20:24:39.222 INFO [http-nio-7070-exec-23] org.apache.jasper.servlet.TldScanner.scanJars Al menos un JAR, que se ha explorado buscando TLDs, aún no contenía TLDs. Activar historial de depuración para este historiador para una completa lista de los JARs que fueron explorados y de los que nos se halló TLDs. Saltarse JARs no necesarios durante la exploración puede dar lugar a una mejora de tiempo significativa en el arranque y compilación de JSP .
+20-Nov-2019 20:24:39.462 INFO [http-nio-7070-exec-23] org.apache.catalina.core.StandardContext.reload Se ha completado la recarga de este Contexto
+20-Nov-2019 20:26:21.863 INFO [http-nio-7070-exec-27] org.apache.catalina.core.StandardContext.reload Ha comenzado la recarga de Contexto []
+20-Nov-2019 20:26:22.432 INFO [http-nio-7070-exec-27] org.apache.jasper.servlet.TldScanner.scanJars Al menos un JAR, que se ha explorado buscando TLDs, aún no contenía TLDs. Activar historial de depuración para este historiador para una completa lista de los JARs que fueron explorados y de los que nos se halló TLDs. Saltarse JARs no necesarios durante la exploración puede dar lugar a una mejora de tiempo significativa en el arranque y compilación de JSP .
+20-Nov-2019 20:26:22.700 INFO [http-nio-7070-exec-27] org.apache.catalina.core.StandardContext.reload Se ha completado la recarga de este Contexto
+20-Nov-2019 20:26:25.769 INFO [http-nio-7070-exec-31] org.apache.catalina.core.StandardContext.reload Ha comenzado la recarga de Contexto []
+20-Nov-2019 20:26:26.337 INFO [http-nio-7070-exec-31] org.apache.jasper.servlet.TldScanner.scanJars Al menos un JAR, que se ha explorado buscando TLDs, aún no contenía TLDs. Activar historial de depuración para este historiador para una completa lista de los JARs que fueron explorados y de los que nos se halló TLDs. Saltarse JARs no necesarios durante la exploración puede dar lugar a una mejora de tiempo significativa en el arranque y compilación de JSP .
+20-Nov-2019 20:26:26.598 INFO [http-nio-7070-exec-31] org.apache.catalina.core.StandardContext.reload Se ha completado la recarga de este Contexto
+20-Nov-2019 20:27:46.735 INFO [http-nio-7070-exec-16] org.apache.catalina.core.StandardContext.reload Ha comenzado la recarga de Contexto []
+20-Nov-2019 20:27:47.337 INFO [http-nio-7070-exec-16] org.apache.jasper.servlet.TldScanner.scanJars Al menos un JAR, que se ha explorado buscando TLDs, aún no contenía TLDs. Activar historial de depuración para este historiador para una completa lista de los JARs que fueron explorados y de los que nos se halló TLDs. Saltarse JARs no necesarios durante la exploración puede dar lugar a una mejora de tiempo significativa en el arranque y compilación de JSP .
+20-Nov-2019 20:27:47.341 INFO [http-nio-7070-exec-16] org.apache.catalina.core.StandardContext.reload Se ha completado la recarga de este Contexto
+20-Nov-2019 20:27:53.290 INFO [http-nio-7070-exec-27] org.apache.catalina.core.StandardContext.reload Ha comenzado la recarga de Contexto []
+20-Nov-2019 20:27:53.769 INFO [http-nio-7070-exec-27] org.apache.jasper.servlet.TldScanner.scanJars Al menos un JAR, que se ha explorado buscando TLDs, aún no contenía TLDs. Activar historial de depuración para este historiador para una completa lista de los JARs que fueron explorados y de los que nos se halló TLDs. Saltarse JARs no necesarios durante la exploración puede dar lugar a una mejora de tiempo significativa en el arranque y compilación de JSP .
+20-Nov-2019 20:27:53.774 INFO [http-nio-7070-exec-27] org.apache.catalina.core.StandardContext.reload Se ha completado la recarga de este Contexto
+20-Nov-2019 20:28:19.505 INFO [main] org.apache.catalina.core.StandardServer.await Se ha recibido un comando de apagado a través del puerto de apagado. Parando la instancia del Servidor.
+20-Nov-2019 20:28:19.506 INFO [main] org.apache.coyote.AbstractProtocol.pause Pausing ProtocolHandler ["http-nio-7070"]
+20-Nov-2019 20:28:19.536 INFO [main] org.apache.coyote.AbstractProtocol.pause Pausing ProtocolHandler ["ajp-nio-8009"]
+20-Nov-2019 20:28:19.536 INFO [main] org.apache.catalina.core.StandardService.stopInternal Parando servicio [Catalina]
+20-Nov-2019 20:28:19.557 INFO [main] org.apache.coyote.AbstractProtocol.stop Stopping ProtocolHandler ["http-nio-7070"]
+20-Nov-2019 20:28:19.559 INFO [main] org.apache.coyote.AbstractProtocol.destroy Destroying ProtocolHandler ["http-nio-7070"]
+20-Nov-2019 20:28:19.559 INFO [main] org.apache.coyote.AbstractProtocol.stop Stopping ProtocolHandler ["ajp-nio-8009"]
+20-Nov-2019 20:28:19.559 INFO [main] org.apache.coyote.AbstractProtocol.destroy Destroying ProtocolHandler ["ajp-nio-8009"]
+20-Nov-2019 20:28:30.647 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Nombre de la versión del servidor:   Apache Tomcat/8.5.47
+
+20-Nov-2019 20:28:30.651 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server built:          Oct 7 2019 13:30:46 UTC
+20-Nov-2019 20:28:30.651 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Número de versión de servidor:         8.5.47.0
+20-Nov-2019 20:28:30.651 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log OS Name:               Windows 10
+20-Nov-2019 20:28:30.651 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Versión de Systema Operativo:      10.0
+
+20-Nov-2019 20:28:30.651 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Arquitectura:          amd64
+
+20-Nov-2019 20:28:30.651 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Java Home:             C:\Program Files\Java\jdk-13.0.1
+20-Nov-2019 20:28:30.651 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM Version:           13.0.1+9
+20-Nov-2019 20:28:30.651 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Vededor JVM:     Oracle Corporation
+20-Nov-2019 20:28:30.651 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_BASE:         C:\Users\Antonio\Desktop\Meetings\apache-tomcat-8.5.47-windows-x64\apache-tomcat-8.5.47
+20-Nov-2019 20:28:30.652 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_HOME:         C:\Users\Antonio\Desktop\Meetings\apache-tomcat-8.5.47-windows-x64\apache-tomcat-8.5.47
+20-Nov-2019 20:28:30.653 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: --add-opens=java.base/java.lang=ALL-UNNAMED
+20-Nov-2019 20:28:30.653 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: --add-opens=java.base/java.io=ALL-UNNAMED
+20-Nov-2019 20:28:30.653 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: --add-opens=java.rmi/sun.rmi.transport=ALL-UNNAMED
+20-Nov-2019 20:28:30.653 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.util.logging.config.file=C:\Users\Antonio\Desktop\Meetings\apache-tomcat-8.5.47-windows-x64\apache-tomcat-8.5.47\conf\logging.properties
+20-Nov-2019 20:28:30.653 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager
+20-Nov-2019 20:28:30.653 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dhttp.nonProxyHosts=localhost|127.0.0.1|DESKTOP-2M9P10F
+20-Nov-2019 20:28:30.653 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djdk.tls.ephemeralDHKeySize=2048
+20-Nov-2019 20:28:30.653 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.protocol.handler.pkgs=org.apache.catalina.webresources
+20-Nov-2019 20:28:30.653 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dignore.endorsed.dirs=
+20-Nov-2019 20:28:30.654 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dcatalina.base=C:\Users\Antonio\Desktop\Meetings\apache-tomcat-8.5.47-windows-x64\apache-tomcat-8.5.47
+20-Nov-2019 20:28:30.654 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dcatalina.home=C:\Users\Antonio\Desktop\Meetings\apache-tomcat-8.5.47-windows-x64\apache-tomcat-8.5.47
+20-Nov-2019 20:28:30.654 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.io.tmpdir=C:\Users\Antonio\Desktop\Meetings\apache-tomcat-8.5.47-windows-x64\apache-tomcat-8.5.47\temp
+20-Nov-2019 20:28:30.654 INFO [main] org.apache.catalina.core.AprLifecycleListener.lifecycleEvent Cargada la biblioteca nativa APR de Apache Tomcat [1.2.23] con la versión APR [1.7.0].
+20-Nov-2019 20:28:30.654 INFO [main] org.apache.catalina.core.AprLifecycleListener.lifecycleEvent Capacidades APR: IPv6 [true], enviar fichero [true], aceptar filtros [false], aleatorio [true].
+20-Nov-2019 20:28:30.717 INFO [main] org.apache.catalina.core.AprLifecycleListener.lifecycleEvent APR/OpenSSL configuration: useAprConnector [false], useOpenSSL [true]
+20-Nov-2019 20:28:30.721 INFO [main] org.apache.catalina.core.AprLifecycleListener.initializeSSL OpenSSL inicializado correctamente [OpenSSL 1.1.1c  28 May 2019]
+20-Nov-2019 20:28:30.757 INFO [main] org.apache.coyote.AbstractProtocol.init Inicializando el manejador de protocolo ["http-nio-7070"]
+
+20-Nov-2019 20:28:30.843 INFO [main] org.apache.tomcat.util.net.NioSelectorPool.getSharedSelector Using a shared selector for servlet write/read
+20-Nov-2019 20:28:30.854 INFO [main] org.apache.coyote.AbstractProtocol.init Inicializando el manejador de protocolo ["ajp-nio-8009"]
+
+20-Nov-2019 20:28:30.855 SEVERE [main] org.apache.catalina.core.StandardService.initInternal No pude inicializar el conector [Connector[AJP/1.3-8009]]
+	org.apache.catalina.LifecycleException: Falló la inicialización del manejador de protocolo
+		at org.apache.catalina.connector.Connector.initInternal(Connector.java:995)
+		at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:136)
+		at org.apache.catalina.core.StandardService.initInternal(StandardService.java:552)
+		at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:136)
+		at org.apache.catalina.core.StandardServer.initInternal(StandardServer.java:848)
+		at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:136)
+		at org.apache.catalina.startup.Catalina.load(Catalina.java:639)
+		at org.apache.catalina.startup.Catalina.load(Catalina.java:662)
+		at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+		at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+		at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+		at java.base/java.lang.reflect.Method.invoke(Method.java:567)
+		at org.apache.catalina.startup.Bootstrap.load(Bootstrap.java:309)
+		at org.apache.catalina.startup.Bootstrap.main(Bootstrap.java:492)
+	Caused by: java.net.BindException: Address already in use: bind
+		at java.base/sun.nio.ch.Net.bind0(Native Method)
+		at java.base/sun.nio.ch.Net.bind(Net.java:469)
+		at java.base/sun.nio.ch.Net.bind(Net.java:458)
+		at java.base/sun.nio.ch.ServerSocketChannelImpl.bind(ServerSocketChannelImpl.java:220)
+		at java.base/sun.nio.ch.ServerSocketAdaptor.bind(ServerSocketAdaptor.java:88)
+		at org.apache.tomcat.util.net.NioEndpoint.bind(NioEndpoint.java:219)
+		at org.apache.tomcat.util.net.AbstractEndpoint.init(AbstractEndpoint.java:1118)
+		at org.apache.tomcat.util.net.AbstractJsseEndpoint.init(AbstractJsseEndpoint.java:224)
+		at org.apache.coyote.AbstractProtocol.init(AbstractProtocol.java:581)
+		at org.apache.catalina.connector.Connector.initInternal(Connector.java:993)
+		... 13 more
+20-Nov-2019 20:28:30.857 INFO [main] org.apache.catalina.startup.Catalina.load Initialization processed in 524 ms
+20-Nov-2019 20:28:30.904 INFO [main] org.apache.catalina.core.StandardService.startInternal Arrancando servicio [Catalina]
+20-Nov-2019 20:28:30.904 INFO [main] org.apache.catalina.core.StandardEngine.startInternal Starting Servlet Engine: Apache Tomcat/8.5.47
+20-Nov-2019 20:28:30.914 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDescriptor Desplieque del descriptor de configuración [C:\Users\Antonio\Desktop\Meetings\apache-tomcat-8.5.47-windows-x64\apache-tomcat-8.5.47\conf\Catalina\localhost\ROOT.xml]
+20-Nov-2019 20:28:31.726 INFO [localhost-startStop-1] org.apache.jasper.servlet.TldScanner.scanJars Al menos un JAR, que se ha explorado buscando TLDs, aún no contenía TLDs. Activar historial de depuración para este historiador para una completa lista de los JARs que fueron explorados y de los que nos se halló TLDs. Saltarse JARs no necesarios durante la exploración puede dar lugar a una mejora de tiempo significativa en el arranque y compilación de JSP .
+20-Nov-2019 20:28:31.803 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDescriptor Deployment of deployment descriptor [C:\Users\Antonio\Desktop\Meetings\apache-tomcat-8.5.47-windows-x64\apache-tomcat-8.5.47\conf\Catalina\localhost\ROOT.xml] has finished in [888] ms
+20-Nov-2019 20:28:31.805 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Desplegando el directorio [C:\Users\Antonio\Desktop\Meetings\apache-tomcat-8.5.47-windows-x64\apache-tomcat-8.5.47\webapps\docs] de la aplicación web
+20-Nov-2019 20:28:31.836 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [C:\Users\Antonio\Desktop\Meetings\apache-tomcat-8.5.47-windows-x64\apache-tomcat-8.5.47\webapps\docs] has finished in [31] ms
+20-Nov-2019 20:28:31.837 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Desplegando el directorio [C:\Users\Antonio\Desktop\Meetings\apache-tomcat-8.5.47-windows-x64\apache-tomcat-8.5.47\webapps\examples] de la aplicación web
+20-Nov-2019 20:28:32.166 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [C:\Users\Antonio\Desktop\Meetings\apache-tomcat-8.5.47-windows-x64\apache-tomcat-8.5.47\webapps\examples] has finished in [329] ms
+20-Nov-2019 20:28:32.167 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Desplegando el directorio [C:\Users\Antonio\Desktop\Meetings\apache-tomcat-8.5.47-windows-x64\apache-tomcat-8.5.47\webapps\host-manager] de la aplicación web
+20-Nov-2019 20:28:32.200 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [C:\Users\Antonio\Desktop\Meetings\apache-tomcat-8.5.47-windows-x64\apache-tomcat-8.5.47\webapps\host-manager] has finished in [33] ms
+20-Nov-2019 20:28:32.201 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Desplegando el directorio [C:\Users\Antonio\Desktop\Meetings\apache-tomcat-8.5.47-windows-x64\apache-tomcat-8.5.47\webapps\manager] de la aplicación web
+20-Nov-2019 20:28:32.234 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [C:\Users\Antonio\Desktop\Meetings\apache-tomcat-8.5.47-windows-x64\apache-tomcat-8.5.47\webapps\manager] has finished in [33] ms
+20-Nov-2019 20:28:32.238 INFO [main] org.apache.coyote.AbstractProtocol.start Starting ProtocolHandler ["http-nio-7070"]
+20-Nov-2019 20:28:32.248 INFO [main] org.apache.catalina.startup.Catalina.start Server startup in 1391 ms
+20-Nov-2019 20:29:22.589 INFO [http-nio-7070-exec-9] org.apache.catalina.core.StandardContext.reload Ha comenzado la recarga de Contexto []
+20-Nov-2019 20:29:23.394 INFO [http-nio-7070-exec-9] org.apache.jasper.servlet.TldScanner.scanJars Al menos un JAR, que se ha explorado buscando TLDs, aún no contenía TLDs. Activar historial de depuración para este historiador para una completa lista de los JARs que fueron explorados y de los que nos se halló TLDs. Saltarse JARs no necesarios durante la exploración puede dar lugar a una mejora de tiempo significativa en el arranque y compilación de JSP .
+20-Nov-2019 20:29:23.708 INFO [http-nio-7070-exec-9] org.apache.catalina.core.StandardContext.reload Se ha completado la recarga de este Contexto
+20-Nov-2019 20:32:36.346 INFO [main] org.apache.catalina.core.StandardServer.await Se ha recibido un comando de apagado a través del puerto de apagado. Parando la instancia del Servidor.
+20-Nov-2019 20:32:36.346 INFO [main] org.apache.coyote.AbstractProtocol.pause Pausing ProtocolHandler ["http-nio-7070"]
+20-Nov-2019 20:32:36.378 INFO [main] org.apache.coyote.AbstractProtocol.pause Pausing ProtocolHandler ["ajp-nio-8009"]
+20-Nov-2019 20:32:36.378 INFO [main] org.apache.catalina.core.StandardService.stopInternal Parando servicio [Catalina]
+20-Nov-2019 20:32:36.422 INFO [main] org.apache.coyote.AbstractProtocol.stop Stopping ProtocolHandler ["http-nio-7070"]
+20-Nov-2019 20:32:36.424 INFO [main] org.apache.coyote.AbstractProtocol.destroy Destroying ProtocolHandler ["http-nio-7070"]
+20-Nov-2019 20:32:36.424 INFO [main] org.apache.coyote.AbstractProtocol.stop Stopping ProtocolHandler ["ajp-nio-8009"]
+20-Nov-2019 20:32:36.424 INFO [main] org.apache.coyote.AbstractProtocol.destroy Destroying ProtocolHandler ["ajp-nio-8009"]

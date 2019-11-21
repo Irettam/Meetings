@@ -16,7 +16,7 @@ import java.io.IOException;
  * @author Programación 2
  */
 public class Web_Settings {
-    
+
     private String ip;
     private String user;
     private String pass;
@@ -46,32 +46,27 @@ public class Web_Settings {
     }
 
     public Web_Settings() throws FileNotFoundException, IOException {
-        
-      String cadena;
-      String ruta = "C:\\Users\\Tomas\\Desktop\\Archivos varios\\CEC\\CEC\\HelloWorldApplication\\webconfig.txt";
-      File archivo = new File(ruta);
-      FileReader f = new FileReader(archivo);
-      BufferedReader b = new BufferedReader(f);
-      int comienzo = 0;
-      int fin = 0;
-               
-      while((cadena = b.readLine())!=null) {
-          fin = cadena.indexOf("|");
-          this.setIp(cadena.substring(comienzo,fin));
-          comienzo = fin+1;
-          fin = cadena.indexOf("|",comienzo);
-          this.setUser(cadena.substring(comienzo,fin));
-           comienzo = fin+1;
-          fin = cadena.indexOf("|",comienzo);
-          this.setPass(cadena.substring(comienzo));
-      }
-      b.close();
-       
+
+        String cadena;
+        String ruta = "C:\\Users\\Antonio\\Desktop\\Meetings - copia\\src\\java\\db\\webconfig.txt";
+        File archivo = new File(ruta);
+        FileReader f = new FileReader(archivo);
+        BufferedReader b = new BufferedReader(f);
+        int comienzo = 0;
+        int fin = 0;
+
+        while ((cadena = b.readLine()) != null) {
+            fin = cadena.indexOf("|");
+            this.setIp(cadena.substring(comienzo, fin));
+            comienzo = fin + 1;
+            fin = cadena.indexOf("|", comienzo);
+            this.setUser(cadena.substring(comienzo, fin));
+            comienzo = fin + 1;
+            fin = cadena.indexOf("|", comienzo);
+            this.setPass(cadena.substring(comienzo));
+        }
+        b.close();
+
     }
-    
-    
-    
-
-
 
 }
