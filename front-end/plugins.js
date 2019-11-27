@@ -11,36 +11,34 @@
         that.find('tr').first().addClass('active');
 
         $(document).keydown(function(event) {
-            if ($("#modal_help").is(":hidden") || $(that).parent("table").attr('id').includes("modal_table")) {
-                if (shiftIsPressed && settings.type != 'simple') {
-                    if (event.which == 38) {
-                        if (that.find('tr.active').prev('tr').length > 0) {
-                            var activar = that.find('tr.active').prev('tr');
-                            activar.addClass('active');
-                        }
+            if (shiftIsPressed && settings.type != 'simple') {
+                if (event.which == 38) {
+                    if (that.find('tr.active').prev('tr').length > 0) {
+                        var activar = that.find('tr.active').prev('tr');
+                        activar.addClass('active');
                     }
+                }
 
-                    if (event.which == 40) {
-                        if (that.find('tr.active').next('tr').length > 0) {
-                            var activar = that.find('tr.active').next('tr');
-                            activar.addClass('active');
-                        }
+                if (event.which == 40) {
+                    if (that.find('tr.active').next('tr').length > 0) {
+                        var activar = that.find('tr.active').next('tr');
+                        activar.addClass('active');
                     }
-                } else {
-                    if (event.which == 38) {
-                        if (that.find('tr.active').prev('tr').length > 0) {
-                            var activar = that.find('tr.active').first().prev('tr');
-                            that.find('tr').removeClass('active');
-                            activar.addClass('active');
-                        }
+                }
+            } else {
+                if (event.which == 38) {
+                    if (that.find('tr.active').prev('tr').length > 0) {
+                        var activar = that.find('tr.active').first().prev('tr');
+                        that.find('tr').removeClass('active');
+                        activar.addClass('active');
                     }
+                }
 
-                    if (event.which == 40) {
-                        if (that.find('tr.active').next('tr').length > 0) {
-                            var activar = that.find('tr.active').last().next('tr');
-                            that.find('tr').removeClass('active');
-                            activar.addClass('active');
-                        }
+                if (event.which == 40) {
+                    if (that.find('tr.active').next('tr').length > 0) {
+                        var activar = that.find('tr.active').last().next('tr');
+                        that.find('tr').removeClass('active');
+                        activar.addClass('active');
                     }
                 }
             }
@@ -101,547 +99,6 @@
 }(jQuery));
 
 (function($) {
-    //Se le tiene que asociar a una tabla. Nada mas hay que pasarle el controller,
-    //y es preferible que el body de la tabla tenga el mismo ID que la tabla_tbody,
-    //pero no es obligatorio para el plugin. En caso de que sea necesario,
-    //se le puede pasar un parametro mas para query en 4d
-    //Se le pueden pasar los parametros para sacarle botones, la busqueda, y 
-    //cambiarle el tipo de seleccion.
-    $.fn.loadOutput = function(options) {
-
-        var yo = this;
-
-        var settings = $.extend({
-            controller: yo.attr('controller'),
-            pantalla: yo.attr('id'),
-            search: true,
-            selection: "all",
-            refreshButton: true,
-            editButton: true,
-            newButton: true,
-            deleteButton: true,
-            printButton: false,
-            contador: true,
-            paginator: true,
-            outputType: "normal",
-            extraParam: null,
-            specialFindby: null,
-            specialValue: null,
-            numeroPantalla: "0",
-            numeroModulo: "0",
-            numeroTabla: "0",
-            onOperationMod: function(tr) {},
-            onTableReady: function(json) {}
-        }, options || {});
-
-        var table;
-        var page = 1;
-        var finalpage;
-        var field = "";
-        var valor = "";
-        var sentido = "desc";
-        var campo = "id";
-
-        cargarDivs();
-
-        if (settings.specialFindby == null) {
-            cargar_tabla(page, "getAll", "");
-        } else {
-            cargar_tabla(page, settings.specialFindby, settings.specialValue);
-        }
-
-        function cargar_tabla(currentpage, type, value) {
-            var paginator = object_paginator(currentpage, 0, 30);
-            var obj = new Object();
-            obj['orden_sentido'] = sentido;
-            obj['orden_campo'] = campo;
-            if (settings.extraParam != null) {
-                obj["extraParam"] = settings.extraParam;
-            }
-            if (type == "getAll" || value == "") {
-                var server = new $4D.Server(settings.controller, "getAll", obj, paginator);
-            } else {
-                obj[type] = value;
-                var server = new $4D.Server(settings.controller, "findby" + type, obj, paginator);
-            }
-            server.Success = function(json, pags, columns) {
-                var trHtml = "";
-                finalpage = pags.totalPage;
-                paginate(settings.controller, settings.controller + '_paginador_' + settings.pantalla, pags, type, value);
-                contador_de_registros(settings.controller + '_contador_' + settings.pantalla, json, pags);
-                $(yo).children('tbody').children('tr').empty();
-                for (var i = json.length - 1; i > -1; i--) {
-                    var row = json[i];
-                    let annulled = false;
-                    if (json[i].Annulled != undefined) {
-                        if (json[i].Annulled.toLowerCase() == "true") {
-                            annulled = true;
-                        }
-                    }
-
-                    if (annulled) {
-                        trHtml += '<tr id=' + json[i].ID + ' class="anulled">';
-                    } else {
-                        trHtml += '<tr id=' + json[i].ID + '>';
-                    }
-
-                    if (settings.outputType.toLowerCase() == "operation") {
-                        var color = json[i].Color;
-                    }
-
-                    var j = 1;
-                    for (var key in row) {
-                        if ($('#' + settings.pantalla + ' > thead > tr > th:nth-child(' + j + ')').css('display') != 'none') {
-                            if (row[key] == 'True') {
-                                trHtml += '<td key="' + key + '">\u2714</td>';
-                            } else {
-                                if (row[key] == 'False') {
-                                    trHtml += '<td key="' + key + '">X</td>';
-                                } else {
-                                    if (settings.outputType.toLowerCase() != "normal") {
-                                        trHtml += '<td style="white-space:nowrap;background-color:' + color + ';" key="' + key + '">' + row[key] + '</td>';
-                                    } else {
-                                        trHtml += '<td>' + row[key] + '</td>';
-                                    }
-                                }
-                            }
-                        } else {
-                            if (row[key] == 'True') {
-                                trHtml += '<td key="' + key + '" style="display:none;">\u2714</td>';
-                            } else {
-                                if (row[key] == 'False') {
-                                    trHtml += '<td key="' + key + '" style="display:none;">X</td>';
-                                } else {
-                                    if (settings.outputType.toLowerCase() != "normal") {
-                                        trHtml += '<td style="display:none;background-color:' + color + ';" key="' + key + '">' + row[key] + '</td>';
-                                    } else {
-                                        trHtml += '<td style="display:none;">' + row[key] + '</td>';
-                                    }
-                                }
-                            }
-                        }
-                        j++;
-                    }
-                    trHtml += '</tr>';
-                }
-                $(yo).append(trHtml);
-                if (table == undefined) {
-                    var i = 1;
-                    for (var key in json[0]) {
-                        $('#' + settings.pantalla + ' > thead > tr > th:nth-child(' + i + ')').attr('value', key);
-                        $('#' + settings.pantalla + ' > thead > tr > th:nth-child(' + i + ')').attr('sentido', 'asc');
-                        $('#' + settings.pantalla + ' > thead > tr > th:nth-child(' + i + ')').addClass('task');
-                        i++;
-                    }
-                    $(document).ready(function() {
-                        if (settings.outputType.toLowerCase() == "normal") {
-                            table = $(yo).DataTable({
-                                responsive: true,
-                                bPaginate: false,
-                                compact: true,
-                                ordering: false,
-                                bFilter: false,
-                                info: false
-                            });
-                        } else {
-                            table = yo;
-                            if (settings.outputType.toLowerCase() == "operation") {
-                                var ancho = $('#GeneralNavTabs').width();
-                                $(yo).css('width', ancho);
-                                $(yo).children('thead').children('tr').children('th').css('width', '4cm');
-                            }
-                            $(yo).css("clear", "both");
-                            $(yo).children('thead').css("background-color", "#337ab7");
-                            $(yo).children('thead').children('tr').children('th').css("color", "white");
-                            $(yo).css("border-color", "#337ab7");
-                            $(yo).css("border-radius", "6px");
-                            $(yo).css("margin-top:", "6px");
-                            $(yo).css("margin-bottom", "6px");
-                            $(yo).css("max-width", "none");
-                        }
-
-                    });
-                    createSearch(columns, settings.controller + '_buscador_' + settings.pantalla);
-                    $('#spinner_' + settings.pantalla).hide();
-                    $(yo).show();
-                    $("#" + settings.controller + '_buscador_' + settings.pantalla + "_Search > :input").keyup(function(event) {
-                        var input = this;
-                        keyUpDelay(function() {
-                            valor = $(input).val();
-                            field = $("#" + settings.controller + '_buscador_' + settings.pantalla + "_Search > select option:selected").attr('key');
-                            page = 1;
-                            cargar_tabla(page, field, valor);
-                        });
-                    });
-                    search_order(settings.pantalla);
-                }
-                settings.onTableReady.call(json);
-            };
-            server.Error = function(json) {
-                $(yo).children('tbody').empty();
-                if (table == undefined) {
-                    $(document).ready(function() {
-                        table = $(yo).DataTable({
-                            responsive: true,
-                            bPaginate: false,
-                            compact: true,
-                            ordering: false,
-                            bFilter: false,
-                            info: false
-                        });
-                    });
-                    createSearch("", settings.controller + '_buscador_' + settings.pantalla);
-                    $('#spinner_' + settings.pantalla).hide();
-                    $(yo).show();
-                    $("#" + settings.controller + '_buscador_' + settings.pantalla + "_Search > :input").keyup(function(event) {
-                        var input = this;
-                        keyUpDelay(function() {
-                            valor = $(input).val();
-                            field = $("#" + settings.controller + '_buscador_' + settings.pantalla + "_Search > select option:selected").attr('key');
-                            page = 1;
-                            cargar_tabla(page, field, valor);
-                        });
-                    });
-                    search_order(settings.pantalla);
-                }
-                settings.onTableReady.call(json);
-            }
-            server.Execute();
-        }
-
-        $('#' + settings.controller + '_paginador_' + settings.pantalla).on('click', 'a', function() {
-            var this_page = $(this).text();
-            if (this_page == "Previous" && page != 1) {
-                page--;
-                cargar_tabla(page, field, valor);
-            }
-            if (this_page == "Next" && page != finalpage) {
-                page++;
-                cargar_tabla(page, field, valor);
-            }
-            if (this_page != "Next" && this_page != "Previous") {
-                page = parseInt(this_page);
-                cargar_tabla(page, field, valor);
-            }
-        });
-
-        $('.tooltip-demo').tooltip({
-            selector: "[data-toggle=tooltip]",
-            container: "body"
-        });
-
-        $(yo).children('tbody').addSelection({ type: settings.selection });
-
-        $('#' + settings.pantalla + ' > thead > tr > th').click(function() {
-            campo = $(this).attr('value');
-            sentido = $(this).attr('sentido');
-            if (sentido == 'asc') {
-                $(this).attr('sentido', 'desc');
-            } else {
-                $(this).attr('sentido', 'asc');
-            }
-            page = 0;
-            if (campo != "" && sentido != "") {
-                cargar_tabla(page, field, valor);
-            }
-        });
-
-        $('#refresh_table_' + settings.pantalla).click(function(event) {
-            cargar_tabla(page, field, valor);
-        });
-
-        $("#export_" + settings.pantalla).click(function(event) {
-            $("#modal_export_principal").modal('show');
-            $("#name_export_modal").val("doc");
-
-            var this_text = $(yo).parent().html();
-
-            click_event_export(this_text);
-
-            function click_event_export(this_text) {
-                $("#modal_export_save").click(function(event) {
-                    var nombre = $("#name_export_modal").val();
-                    var blob = new Blob([this_text], { type: "text/plain;charset=utf-8" });
-                    var extension = $("#export_extension").val();
-                    saveAs(blob, nombre + extension);
-                    $('#modal_export_principal').modal('hide');
-                    $("#modal_export_save").unbind('click');
-                    event.stopImmediatePropagation();
-                });
-
-            }
-
-            $("#modal_export_close").click(function(event) {
-                $("#modal_export_principal").modal('hide');
-            });
-        });
-
-        if (settings.outputType.toLowerCase() == "operation") {
-            $('#edit_record_' + settings.pantalla).click(function(event) {
-                if ($(yo).find('input').length == 0) {
-                    $.when(verificar_permiso(settings.numeroModulo, settings.numeroPantalla, 'MOD')).done(function(res) {
-                        var tr = $(yo).find('tr.active');
-                        var regId = tr.find('td:eq( 0 )').text();
-                        $.when(checkear(regId, settings.numeroTabla, settings.numeroPantalla)).fail(function(res) {
-                            $(tr).createInputRow({ pantalla: settings.pantalla });
-                            settings.onOperationMod.call(tr);
-                            $(tr).find('td:eq(3)').find('input:first-child').focus();
-                            $("#save_record_" + settings.pantalla).click(function(event) {
-                                var error = $(tr).checkFields();
-                                if (error == false) {
-                                    var obj = $(tr).createObject({
-                                        pantalla: settings.pantalla,
-                                        registro: regId,
-                                        controller: settings.controller,
-                                        save: true,
-                                        onSuccess: function() {
-                                            $(tr).createInputRow({ mode: 'disable' });
-                                            liberar(regId, settings.numeroTabla);
-                                            $("#save_record_" + settings.pantalla).unbind('click');
-                                        }
-                                    });
-                                }
-                            });
-                        });
-                    });
-                } else {
-                    swal('Cuidado', 'Ya esta modificando un registro', 'warning');
-                }
-            });
-
-            $('#new_record_' + settings.pantalla).click(function(event) {
-                if ($(yo).find('input').length == 0) {
-                    $.when(verificar_permiso(settings.numeroModulo, settings.numeroPantalla, 'ING')).done(function(res) {
-                        var datenow = new Date();
-                        datenow = datenow.toLocaleDateString();
-                        datenow = date_to_html(datenow);
-                        var new_tr = $(yo).children('tbody').find('tr').first().clone();
-                        new_tr.children('td').text("");
-                        $(yo).prepend(new_tr);
-                        $(new_tr).createInputRow({ pantalla: settings.pantalla });
-                        var obj = new Object();
-                        var serverid = new $4D.Server(settings.controller, "create_id", obj);
-                        $.when(serverid.Execute()).done(function(respuesta) {
-                            $(new_tr).find('td').first().text(respuesta.ID);
-                            $(new_tr).attr('id', respuesta.ID);
-                        });
-                        new_tr.find('td:eq(2)').children('input').val(datenow);
-                        new_tr.find('td:eq(3)').children('input').focus();
-                        settings.onOperationMod.call(new_tr);
-                        $("#save_record_" + settings.pantalla).click(function(event) {
-                            var error = $(new_tr).checkFields();
-                            if (error == false) {
-                                var obj = $(new_tr).createObject({
-                                    pantalla: settings.pantalla,
-                                    registro: "record_vacio",
-                                    controller: settings.controller,
-                                    save: true,
-                                    onSuccess: function(newId) {
-                                        $(new_tr).find('td:eq(0)').text(newId.ID);
-                                        $(new_tr).find('td:eq(1)').text(newId.status);
-                                        $(new_tr).createInputRow({ mode: 'disable' });
-                                        $("#save_record_" + settings.pantalla).unbind('click');
-                                    }
-                                });
-                            }
-                        });
-                        $(window).keypress(function(event) {
-                            if (event.which == 27) {
-                                var delobj = new Object();
-                                delobj['id'] = $(new_tr).attr('id');
-                                var delserver = new $4D.server(settings.controller, "delete", delobj);
-                                delserver.Success = function() {
-                                    $(new_tr).remove();
-                                };
-                                delserver.Execute();
-                            }
-                            $(this).unbind(event);
-                        });
-                    });
-                } else {
-                    swal('Cuidado', 'No puede crear un registro mientras modifica otro', 'warning');
-                }
-            });
-        }
-
-        if (settings.outputType.toLowerCase() == "dialog") {
-            $('#edit_record_' + settings.pantalla).click(function(event) {
-                if ($(yo).find('input').length == 0) {
-                    $.when(verificar_permiso(settings.numeroModulo, settings.numeroPantalla, 'MOD')).done(function(res) {
-                        var tr = $(yo).find('tr.active');
-                        var regId = tr.find('td:eq( 0 )').text();
-                        $.when(checkear(regId, settings.numeroTabla, settings.numeroPantalla)).fail(function(res) {
-                            $(tr).createInputRow({ pantalla: settings.pantalla });
-                            settings.onOperationMod.call(tr);
-                            $(tr).find('td:eq(1)').find('input:first-child').focus();
-                            $("#save_record_" + settings.pantalla).click(function(event) {
-                                var error = $(tr).checkFields();
-                                if (error == false) {
-                                    var obj = $(tr).createObject({
-                                        pantalla: settings.pantalla,
-                                        registro: regId,
-                                        controller: settings.controller,
-                                        save: true,
-                                        extraParam: settings.specialValue,
-                                        onSuccess: function() {
-                                            $(tr).createInputRow({ mode: 'disable' });
-                                            liberar(regId, settings.numeroTabla);
-                                            $("#save_record_" + settings.pantalla).unbind('click');
-                                        }
-                                    });
-                                }
-                            });
-                        });
-                    });
-                } else {
-                    swal('Cuidado', 'Ya esta modificando un registro', 'warning');
-                }
-            });
-
-            $('#new_record_' + settings.pantalla).click(function(event) {
-                if ($(yo).find('input').length == 0) {
-                    $.when(verificar_permiso(settings.numeroModulo, settings.numeroPantalla, 'ING')).done(function(res) {
-                        var new_tr = "<tr id='tr_vacio'>";
-                        $(yo).children('thead').find('th').each(function(index, el) {
-                            if ($(this).css('display') == "none") {
-                                new_tr += "<td style='display:none' key='" + $(this).attr("key") + "'></td>";
-                            } else {
-                                new_tr += "<td key='" + $(this).attr("key") + "'></td>";
-                            }
-                        });
-                        new_tr += "</tr>"
-                        $(yo).prepend(new_tr);
-                        new_tr = $(yo).children('tbody').find("tr").first();
-                        $(new_tr).createInputRow({ pantalla: settings.pantalla });
-                        settings.onOperationMod.call(new_tr);
-                        $("#save_record_" + settings.pantalla).click(function(event) {
-                            var error = $(new_tr).checkFields();
-                            if (error == false) {
-                                var obj = $(new_tr).createObject({
-                                    pantalla: settings.pantalla,
-                                    registro: "record_vacio",
-                                    controller: settings.controller,
-                                    extraParam: settings.specialValue,
-                                    save: true,
-                                    onSuccess: function(newId) {
-                                        $(new_tr).find('td:eq(0)').text(newId.ID);
-                                        $(new_tr).createInputRow({ mode: 'disable' });
-                                        $("#save_record_" + settings.pantalla).unbind('click');
-                                    }
-                                });
-                            }
-                        });
-                    });
-                } else {
-                    swal('Cuidado', 'No puede crear un registro mientras modifica otro', 'warning');
-                }
-            });
-        }
-
-        $(window).keypress(function(event) {
-            if ($(yo).is(":visible")) {
-                if (shiftIsPressed) {
-                    switch (event.which) {
-                        case 77:
-                            $('#edit_record_' + settings.pantalla).trigger('click');
-                            break;
-                        case 13:
-                            $("#save_record_" + settings.pantalla).trigger('click');
-                            break;
-                        case 78:
-                            $('#new_record_' + settings.pantalla).trigger('click');
-                            break;
-                        case 68:
-                            $('#delete_record_' + settings.pantalla).trigger('click');
-                            break;
-                        case 82:
-                            $('#refresh_table_' + settings.pantalla).trigger('click');
-                            break;
-                        case 80:
-                            $('#print_record_' + settings.pantalla).trigger('click');
-                            break;
-                    }
-                }
-            }
-        });
-
-        $('#delete_record_' + settings.pantalla).click(function(event) {
-            let rec_id = $(yo).find('tbody').find('tr.active').first().attr("id");
-            let pantalla = $("#GeneralNavTabs").find('li.active').children('a').text();
-            cargarHistorial(pantalla, "DEL", rec_id);
-        });
-
-        function cargarDivs() {
-            var div_buttons;
-
-            if (settings.search == true) {
-                var div_buscador = '<div id="' + settings.controller + '_buscador_' + settings.pantalla + '"style="float:left;"></div>';
-                $(div_buscador).insertBefore(yo);
-            }
-
-            if (settings.contador == true) {
-                var div_contador = '<div id="' + settings.controller + '_contador_' + settings.pantalla + '" style="float: left;width: 30%"></div>';
-                $(yo).after(div_contador);
-            }
-
-            if (settings.paginator == true) {
-                var div_paginador = '<div id="' + settings.controller + '_paginador_' + settings.pantalla + '" style="float: right;width: 50%"></div>';
-                $(yo).after(div_paginador);
-            }
-
-            var div_video = '    <div class="footer navbar-fixed-bottom" style="display: none;" id="div_video_' + settings.pantalla + '"></div>'
-
-            var div_spinner = '<div id="spinner_' + settings.pantalla + '" align="center"><br><br><br><br><br><img src="../dist/Images/spin.gif"></div>'
-
-            div_buttons = '<div id="buttons_' + settings.pantalla + '" class="tooltip-demo" style="margin-top: 2mm;float: right;margin-bottom:1px;">';
-
-            if (settings.deleteButton == true) {
-                div_buttons += '<span style="margin-left: 2mm;float: right;"><button permiso="DEL" class="btn btn-outline btn-danger btn-xs" id="delete_record_' + settings.pantalla + '" data-toggle="tooltip" title="Delete(Shift+D)"><i class="fa fa-minus"></i></button></span>';
-            }
-
-            if (settings.outputType.toLowerCase() != "normal") {
-                div_buttons += '<span style="margin-left: 2mm;float: right;"><button permiso="ING" class="btn btn-outline btn-success btn-xs" id="save_record_' + settings.pantalla + '" data-toggle="tooltip" title="Save(Shift+Enter)"><i class="fa fa-check"></i></button></span>';
-            }
-
-            if (settings.editButton == true) {
-                div_buttons += '<span style="margin-left: 2mm;float: right;"><button permiso="MOD" class="btn btn-outline btn-warning btn-xs" id="edit_record_' + settings.pantalla + '" data-toggle="tooltip" title="Modify(Shift+M)"><i class="fa fa-pencil"></i></button></span>';
-            }
-
-            if (settings.newButton) {
-                div_buttons += '<span style="margin-left: 2mm;float: right;"><button permiso="ING" class="btn btn-outline btn-success btn-xs" id="new_record_' + settings.pantalla + '" data-toggle="tooltip" title="New(Shift+N)"><i class="fa fa-plus"></i></button></span>';
-            }
-
-            div_buttons += '<span style="margin-left: 2mm;float: right;"><button class="btn btn-outline btn-info btn-xs" id="info_' + settings.pantalla + '" data-toggle="tooltip" href="http://www.latam-soft.com/es/soporte-en-linea/" title="Help"><i class="fa fa-info-circle"></i></button></span>';
-
-            div_buttons += '<span style="margin-left: 2mm;float: right;"><button class="btn btn-outline btn-danger btn-xs" id="video_' + settings.pantalla + '" data-toggle="tooltip" title="View Video"><i class="fa fa-youtube-play"></i></button></span>';
-
-            if (settings.refreshButton == true) {
-                div_buttons += '<span style="margin-left: 2mm;float: right;"><button class="btn btn-outline btn-primary btn-xs" id="refresh_table_' + settings.pantalla + '" data-toggle="tooltip" title="Refresh(Shift+R)"><i class="fa fa-refresh"></i></button></span>';
-            }
-
-            if (settings.printButton == true) {
-                div_buttons += '<span style="margin-left: 2mm;float: right;"><button class="btn btn-outline btn-info btn-xs" id="print_record_' + settings.pantalla + '" data-toggle="tooltip" title="Print(Shift+P)"><i class="fa fa-print"></i></button></span>';
-            }
-
-            div_buttons += '<span style="margin-left: 2mm;float: right;"><button class="btn btn-outline btn-warning btn-xs" id="export_' + settings.pantalla + '" data-toggle="tooltip" title="Export"><i class="fa fa-html5"></i></button></span>';
-
-            div_buttons += '</div>';
-            $(div_buttons).insertBefore(yo);
-            $(div_spinner).insertBefore(yo);
-            $(div_video).insertBefore(yo);
-            $('#info_' + settings.pantalla).click(function(event) {
-                $(this).attr("target", "_blank");
-                window.open($(this).attr('href'));
-            });
-            $('#video_' + settings.pantalla).click(function(event) {
-                $('#div_video_' + settings.pantalla).toggle();
-            });
-        }
-
-    };
-}(jQuery));
-
-(function($) {
     //Carga todos los valores de un input y les cambia los id sumandole el id del registro.
     //Se le tiene que pasar el controller y el nombre de la pantalla, y por defecto trae los datos del servidor.
     //Para que funcione, los campos del input se deben llamar igual que el campo de la tabla mas 
@@ -655,8 +112,8 @@
             controller: $(div).attr('controller'),
             pantalla: null,
             registro: 'vacio',
-            serverCall: true,
-            cambiarID: true,
+            serverCall: false,
+            cambiarID: false,
             onDataReady: function(json) {}
         }, options);
 
@@ -668,103 +125,31 @@
         var paragraphs = $(div).find('p');
         var tds = $(div).find('td');
 
-        if (settings.cambiarID == true) {
+        var data = settings.values;
 
-            inputs.each(function(index, el) {
-                var aux_id = $(this).attr('id');
-                $(this).attr('id', aux_id + settings.registro);
-            });
+        for (var key in data) {
+            var value = data[key];
 
-            paragraphs.each(function(index, el) {
-                var aux_id = $(this).attr('id');
-                $(this).attr('id', aux_id + settings.registro);
-            });
-
-            tds.each(function(index, el) {
-                var aux_id = $(this).attr('id');
-                $(this).attr('id', aux_id + settings.registro);
-            });
-
+            if (value == 'True') {
+                value = true;
+                $('#' + key).prop("checked", true);
+            } else {
+                if (value == 'False') {
+                    value = false;
+                    $('#' + key).prop("checked", false);
+                } else {
+                    if ($('#' + key).is('INPUT')) {
+                        $('#' + key).val(value);
+                    } else {
+                        $('#' + key).text(value);
+                    }
+                }
+            }
         }
 
-        if (settings.serverCall == true) {
-            var server = new $4D.Server(settings.controller, 'getInput', obj);
-
-            server.Success = function(json) {
-
-                if (settings.cambiarID == false) {
-                    settings.registro = "";
-                }
-
-                var data = json[0];
-
-                for (var key in data) {
-                    var value = data[key];
-
-                    if (!Array.isArray(value)) {
-                        if (value.toLowerCase() == 'true') {
-                            value = true;
-                            $('#' + key + '_' + settings.pantalla + settings.registro).prop("checked", true);
-                        } else {
-                            if (value.toLowerCase() == 'false') {
-                                value = false;
-                                $('#' + key + '_' + settings.pantalla + settings.registro).prop("checked", false);
-                            } else {
-                                if ($('#' + key + '_' + settings.pantalla + settings.registro).is('INPUT')) {
-                                    $('#' + key + '_' + settings.pantalla + settings.registro).val(value);
-                                } else {
-                                    $('#' + key + '_' + settings.pantalla + settings.registro).text(value);
-                                }
-                            }
-                        }
-                    }
-                }
-
-                if (settings.cambiarID == true) {
-                    var aux_id = $(div).attr('id');
-                    $(div).attr('id', aux_id + settings.registro);
-                }
-
-                settings.onDataReady.call(json);
-            }
-            server.Error = function(json) {
-                if (settings.cambiarID == true) {
-                    var aux_id = $(div).attr('id');
-                    $(div).attr('id', aux_id + settings.registro);
-                }
-
-                settings.onDataReady.call(json);
-            }
-
-            return server.Execute();
-
-        } else {
-            var data = settings.values;
-
-            for (var key in data) {
-                var value = data[key];
-
-                if (value == 'True') {
-                    value = true;
-                    $('#' + key + '_' + settings.pantalla + settings.registro).prop("checked", true);
-                } else {
-                    if (value == 'False') {
-                        value = false;
-                        $('#' + key + '_' + settings.pantalla + settings.registro).prop("checked", false);
-                    } else {
-                        if ($('#' + key + '_' + settings.pantalla + settings.registro).is('INPUT')) {
-                            $('#' + key + '_' + settings.pantalla + settings.registro).val(value);
-                        } else {
-                            $('#' + key + '_' + settings.pantalla + settings.registro).text(value);
-                        }
-                    }
-                }
-            }
-
-            if (settings.cambiarID == true) {
-                var aux_id = $(div).attr('id');
-                $(div).attr('id', aux_id + settings.registro);
-            }
+        if (settings.cambiarID == true) {
+            var aux_id = $(div).attr('id');
+            $(div).attr('id', aux_id + settings.registro);
         }
 
     };
@@ -790,14 +175,12 @@
         }, options || {});
 
         var obj = new Object();
-        obj['ID'] = settings.registro;
+        obj['id'] = settings.registro;
 
         var inputs = $(this).find(':input:not(:button)');
 
         inputs.each(function(index, el) {
-            var auxId = $(this).attr('id');
-            auxId = auxId.split('_' + settings.pantalla);
-            var key = auxId[0];
+            var key = $(this).attr('id');;
             var value = "";
             if (!$(this)[0].hasAttribute("no-guardar")) {
                 if ($(this).is(':checkbox')) {

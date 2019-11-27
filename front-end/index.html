@@ -55,7 +55,7 @@
                 <!-- /.dropdown -->
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                        <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
                         <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
@@ -231,37 +231,41 @@
             <tr>
                 <td>Enterprise: </td>
                 <td>
-                    <input id="Enterprise_id" style="display: none;" type="text">
-                    <input id="Enterprise_name" style="width: 13cm;" class="form-control" type="Text" value="" disabled="disabled">
+                    <input id="Enterprise_id_profile" style="display: none;" type="text">
+                    <input id="Enterprise_name_profile" style="width: 13cm;" class="form-control" type="Text" value="" disabled="disabled" no-guardar>
                 </td>
             </tr>
             <tr>
                 <td>Contact Name:</td>
-                <td><input id="Contact_name" style="width: 13cm;" class="form-control" type="Text" value=""></td>
+                <td><input id="contacto" style="width: 13cm;" class="form-control" type="Text" value=""></td>
+            </tr>
+            <tr>
+                <td>Email:</td>
+                <td><input id="mail" style="width: 13cm;" class="form-control" type="Text" value=""></td>
             </tr>
             <tr>
                 <td>Country:</td>
-                <td><input id="Country" style="width: 13cm;" class="form-control" type="Text" value=""></td>
+                <td><input id="pais" style="width: 13cm;" class="form-control" type="Text" value=""></td>
             </tr>
             <tr>
                 <td>Flag:</td>
                 <td>
-                    <input id="flag_photo" type="file">
+                    <input id="flag" type="file" no-guardar>
                 </td>
             </tr>
             <tr>
                 <td></td>
-                <td><pre id="flagDisplayArea"><pre></td>
+                <td><img id="flagDisplayArea" no-guardar><img></td>
             </tr>
             <tr>
                 <td>Photo:</td>
                 <td>
-                    <input id="Contact_photo" type="file">
+                    <input id="foto_persona" type="file" no-guardar>
                 </td>
             </tr>
             <tr>
                 <td></td>
-                <td><pre id="fileDisplayArea"><pre></td>
+                <td><img id="fileDisplayArea" no-guardar><img></td>
             </tr>
         </table>
     </div>

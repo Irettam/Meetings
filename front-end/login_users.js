@@ -21,7 +21,7 @@ $("#login_btn").click(function(event) {
 });
 
 $(window).keypress(function(event) {
-    if(event.which == 13){
+    if (event.which == 13) {
         $("#login_btn").trigger('click');
     }
 });

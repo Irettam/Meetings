@@ -34,22 +34,24 @@ $(document).keyup(function() {
 });
 
 function conexion(controller, action, param) {
-	var user = new Object();
-	param["controller"] = controller;
-	param["action"] = action;
-	param["user"] = "1";
+    var user = new Object();
+    param["controller"] = controller;
+    param["action"] = action;
+    param["user"] = "1";
     return $.ajax({
-        type: "GET",
-        //url: 'http://localhost:4040/HelloWorldApplication/webresources/Conexion/' + JSON.stringify(param),
-        url: 'http://localhost:4040/Meetings/webresources/Conexion/' + JSON.stringify(param),
-        success: function(data){
-        	return data;
+        type: "POST",
+        contentType: "application/json",
+        //url: 'http://192.168.0.10:4040/Meetings/webresources/Conexion/' + JSON.stringify(param),
+        url: 'http://192.168.0.10:4040/Meetings/webresources/Conexion/post',
+        data: JSON.stringify(param),
+        success: function(data) {
+            return data;
         },
         error: function(data) {
-        	return data;
+            return data;
         }
     })
-    
+
 }
 
 function create_tr_var(json) {
@@ -176,3 +178,38 @@ function create_tr_with_id(id) {
         });
     };
 }(jQuery));
+
+var cntrlIsPressed = false;
+var shiftIsPressed = false;
+var comIsPressed = false;
+var altIsPressed = false;
+
+$(document).keydown(function(event) {
+    if (event.which == "91") {
+        comIsPressed = true;
+    }
+    if (event.which == "17") {
+        cntrlIsPressed = true;
+    }
+    if (event.which == "16") {
+        shiftIsPressed = true;
+    }
+    if (event.which == "18") {
+        altIsPressed = true;
+    }
+});
+
+$(document).keyup(function() {
+    if (event.which == "91") {
+        comIsPressed = false;
+    }
+    if (event.which == "17") {
+        cntrlIsPressed = false;
+    }
+    if (event.which == "16") {
+        shiftIsPressed = false;
+    }
+    if (event.which == "18") {
+        altIsPressed = false;
+    }
+});

@@ -11,6 +11,7 @@ $("#login_btn").click(function(event) {
             } else {
                 if (typeof(Storage) !== "undefined") {
                     localStorage.setItem("user", res.ResultSet[0].id);
+                    localStorage.setItem("nombre", res.ResultSet[0].nombre);
                     window.location.href = "index.html";
                 } else {
                     alert("The browser you are currently using does not support the latest version of HTML5, please select another one and try again");
@@ -21,7 +22,7 @@ $("#login_btn").click(function(event) {
 });
 
 $(window).keypress(function(event) {
-    if(event.which == 13){
+    if (event.which == 13) {
         $("#login_btn").trigger('click');
     }
 });
