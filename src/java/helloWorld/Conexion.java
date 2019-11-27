@@ -81,7 +81,11 @@ public class Conexion {
 
         }
         //obj.put("Resultset", obj);
-        return Response.status(200).entity(obj).header("Access-Control-Allow-Origin", "*").build();
+        return Response.status(200).entity(obj).header("Access-Control-Allow-Origin", "*")
+                .header("Access-Control-Allow-Methods", "API, CRUNCHIFYGET, GET, POST, PUT, UPDATE, OPTIONS")
+                .header("Access-Control-Max-Age", "151200")
+                .header("Access-Control-Allow-Headers", "x-requested-with,Content-Type")
+                .build();
     }
 
     /**
@@ -91,11 +95,38 @@ public class Conexion {
      * @return
      */
     @POST
-    @Consumes(MediaType.TEXT_PLAIN)
+    @Consumes(MediaType.APPLICATION_JSON)
     @Produces("application/json")
-    public Response postHtml(String data) {
+    //@Path("{data}")
+    @Path("/post")
+    public Response postHtml(String data) throws SQLException, java.text.ParseException {
+        /*JSONObject obj = new JSONObject();
+        obj.put("webService", data);*/
+        Gson g = new Gson();
+        Llamada llamada = g.fromJson(data, Llamada.class);
         JSONObject obj = new JSONObject();
-        obj.put("webService", data);
-        return Response.status(200).entity(obj).header("Access-Control-Allow-Origin", "*").build();
+        Gson json = new Gson();
+        switch (llamada.getController()) {
+            case "Lugar":
+                obj = Lugar.dispatcher(llamada, data);
+                break;
+            case "Usuarios":
+                obj = Usuarios.dispatcher(llamada, data);
+                break;
+            case "Clientes":
+                obj = Clientes.dispatcher(llamada, data);
+                break;
+            case "Conexiones":
+                obj = Conexiones.dispatcher(llamada, data);
+                break;
+            default:
+                obj.put("Resultset", "Controller inexistente");
+
+        }
+        return Response.status(200).entity(obj).header("Access-Control-Allow-Origin", "*")
+                .header("Access-Control-Allow-Methods", "API, CRUNCHIFYGET, GET, POST, PUT, UPDATE, OPTIONS")
+                .header("Access-Control-Max-Age", "151200")
+                .header("Access-Control-Allow-Headers", "x-requested-with,Content-Type")
+                .build();
     }
 }

@@ -147,6 +147,7 @@ public class Conexiones {
                 }
                 obj.put("ResultSet", arr);
                 rs.close();
+                Tabla.close();
                 break;
             case "select_confirm":
                 Gson g3 = new Gson();
@@ -166,6 +167,7 @@ public class Conexiones {
                 }
                 obj.put("ResultSet", arr);
                 rs2.close();
+                Tabla.close();
                 break;
             case "select_pending":
                 Gson g5 = new Gson();
@@ -185,6 +187,7 @@ public class Conexiones {
                 }
                 obj.put("ResultSet", arr);
                 rs5.close();
+                Tabla.close();
                 break;
             case "save":
                 Gson g = new Gson();
@@ -211,6 +214,7 @@ public class Conexiones {
                 } else {
                     obj.put("Resultset", "false");
                 }
+                rs4.close();
                 break;
             case "horarios":
                 ResultSet rs3 = Tabla.executeThis("select dia,horario_inicio, horario_final from mesas where ocupado = false group by dia,horario_inicio,horario_final order by dia,horario_inicio");

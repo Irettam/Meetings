@@ -1,7 +1,7 @@
 $("#login_btn").click(function(event) {
     var obj = new Object();
     obj["nombre"] = $("#user_login").val();
-    obj["contrasena"] = $("#contraseña_login").val()
+    obj["contraseña"] = $("#contraseña_login").val()
     $.when(conexion("Usuarios", "login", obj)).done(function(res) {
         if (res.ResultSet[0].id == "error") {
             alert("Clave incorrecta");
@@ -18,4 +18,10 @@ $("#login_btn").click(function(event) {
             }
         }
     });
+});
+
+$(window).keypress(function(event) {
+    if(event.which == 13){
+        $("#login_btn").trigger('click');
+    }
 });
