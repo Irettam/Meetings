@@ -14,6 +14,19 @@ import org.ietf.jgss.Oid;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.util.Iterator;
+import org.apache.poi.ss.usermodel.Cell;
+
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.Font;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.xssf.usermodel.XSSFCell;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
 /**
  *
  * @author Tomas
@@ -44,6 +57,20 @@ public class Clientes {
         this.bandera = bandera;
         this.foto_persona = foto_persona;
         this.activo = activo;
+    }
+
+    public Clientes() {
+        this.id = 0;
+        this.nombre = "";
+        this.usuario = "";
+        this.contrasena = "";
+        this.mail = "";
+        this.contacto = "";
+        this.pais = "";
+        this.logo = null;
+        this.bandera = "";
+        this.foto_persona = null;
+        this.activo = true;
     }
 
     public String getPais() {
@@ -191,6 +218,7 @@ public class Clientes {
                     JSONObject line = new JSONObject();
                     line.put("id", rs3.getInt("id"));
                     line.put("nombre", rs3.getString("nombre"));
+                    line.put("mail", rs3.getString("mail"));
                     //line.put("contraseña", rs.getString("contrasena"));
                     line.put("activo", rs3.getBoolean("activo"));
                     arr.add(line);
@@ -240,15 +268,24 @@ public class Clientes {
         return obj;
     }
 
-    public static int insert(int id, String nombre, String usuario, String contrasena, Oid logo, String contacto) {
+    public static int insert(int id, String nombre, String usuario, String contrasena, String mail, String contacto) {
         String campos = "id,nombre,contrasena,email,anulado";
-        String valores = id + ",'" + nombre + "','" + usuario + "','" + contrasena + "'," + logo + "','" + contacto + "'";
+        String valores = (Tabla.UltimoNumero(tabla)+1) + ",'" + nombre + "','" + usuario + "','" + contrasena + "','" + mail + "','" + contacto + "'";
         return Tabla.insert(tabla, campos, valores);
     }
 
     public void Guardar() {
-        Clientes.insert(this.id, this.nombre, this.usuario, this.contrasena, this.logo, this.contacto);
+        Clientes.insert(this.id, this.nombre, this.usuario, this.contrasena, this.mail, this.contacto);
+    }
 
+    public void GuardarExcel() {
+        Clientes.insertExcel(this.id, this.nombre, this.usuario, this.contrasena, this.mail, this.contacto);
+    }
+
+    public static int insertExcel(int id, String nombre, String usuario, String contrasena, String mail, String contacto) {
+        String camposExcel = "id,nombre,usuario,contrasena,mail,contacto";
+        String valores = (Tabla.UltimoNumero(tabla)+1) + ",'" + nombre + "','" + usuario + "','" + contrasena + "','" + mail + "','" + contacto + "'";
+        return Tabla.insert(tabla, camposExcel, valores);
     }
 
     public static int updateAll(int id, String nombre, String contrasena, String email, boolean activo) {
