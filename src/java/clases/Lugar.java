@@ -215,6 +215,7 @@ public class Lugar {
                 obj.put("Result", "Mesas borradas");
                 break;
             case "BorrarLugares":
+                Tabla.executeThis("delete from mesas");
                 Tabla.deleteAll(tabla);
                 obj.put("Result", "Lugares borrados");
                 break;
