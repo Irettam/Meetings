@@ -1,1 +1,1 @@
-192.168.0.10:5433/Meetings|postgres|postgres
+localhost:5433/Meetings|postgres|postgres

@@ -75,6 +75,11 @@ public class Tabla {
         return execute();
     }
 
+    public static int deleteAll(String tabla) {
+        consulta = "delete from " + tabla;
+        return execute();
+    }
+
     public static int insert(String tabla, String campos, String valores) {
         consulta = "insert into " + tabla + " (" + campos + ") values (" + valores + ")";
         return execute();
@@ -116,6 +121,7 @@ public class Tabla {
     public static ResultSet select(String tabla, String filtro) {
         ResultSet rs = null;
         consulta = "select * from " + tabla + " where " + filtro;
+        System.out.println(consulta);
         connect();
         try {
             rs = sentencia.executeQuery(consulta);
@@ -144,6 +150,7 @@ public class Tabla {
     public static ResultSet executeThis(String exe) {
         ResultSet rs = null;
         consulta = exe;
+        System.out.println(consulta);
         connect();
         try {
             rs = sentencia.executeQuery(consulta);
