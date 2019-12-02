@@ -175,8 +175,14 @@ $("#profile").click(function(event) {
         console.log(res);
         $("#dialog_profile").fillInputs({ values: res.ResultSet[0] });
         var output = document.getElementById('flagDisplayArea');
+        var output2 = document.getElementById('fileDisplayArea');
+        var output3 = document.getElementById('logoDisplayArea');
         banderaTexto = res.ResultSet[0].bandera;
+        logoTexto = res.ResultSet[0].logo;
+        personaTexto = res.ResultSet[0].foto_persona;
         output.src = banderaTexto;
+        output2.src = personaTexto;
+        output3.src = logoTexto;
     });
 
     $("#dialog_profile").dialog({
@@ -208,7 +214,7 @@ $("#profile").click(function(event) {
         console.log(reader);
     });
 
-    $("#foto_persona").change(function(event) {
+    $("#foto_persona_boton").change(function(event) {
         var input = event.target;
         reader.onload = function() {
             var dataURL = reader.result;
@@ -220,7 +226,7 @@ $("#profile").click(function(event) {
         console.log(reader);
     });
     
-    $("#logo").change(function(event) {
+    $("#logo_boton").change(function(event) {
         var input = event.target;
         reader.onload = function() {
             var dataURL = reader.result;
