@@ -7,4 +7,4 @@
  * Author:  Tomas
  * Created: 19/11/2019
  */
-select * from clientes;
+select * from conexiones where 1=1;

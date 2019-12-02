@@ -242,20 +242,21 @@ public class Conexiones {
                 obj.put("ResultSet", arr);
                 break;
             case "getAll":
-                ResultSet rs7 = Conexiones.select();
-                while (rs7.next()) {
+                ResultSet rsc7 = Tabla.executeThis("select * from conexiones");
+                while (rsc7.next()) {
+                    System.out.println(rsc7.getInt("id"));
                     JSONObject line = new JSONObject();
-                    line.put("id", rs7.getInt("id"));
-                    line.put("id_cliente2", rs7.getInt("id_cliente2"));
-                    line.put("nombre", rs7.getString("nombre"));
-                    line.put("horario_inicio", rs7.getString("horario_inicio"));
-                    line.put("horario_final", rs7.getString("horario_final"));
-                    line.put("fecha", rs7.getString("fecha"));
-                    line.put("mesa", rs7.getInt("mesa_num"));
+                    line.put("id_cliente1", rsc7.getInt("id_cliente1"));
+                    line.put("id_cliente2", rsc7.getInt("id_cliente2"));
+                    line.put("id", rsc7.getInt("id"));
+                    line.put("horario_inicio", rsc7.getString("horario_inicio"));
+                    line.put("horario_final", rsc7.getString("horario_final"));
+                    line.put("fecha", rsc7.getString("fecha"));
+                    line.put("mesa", rsc7.getInt("mesa_num"));
                     arr.add(line);
                 }
                 obj.put("ResultSet", arr);
-                rs7.close();
+                rsc7.close();
                 break;
         }
         return obj;

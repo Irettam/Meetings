@@ -169,8 +169,8 @@ public class Lugar {
                 ResultSet res = Lugar.select();
                 Lugar lugar2 = g.fromJson(data, Lugar.class);
                 lugar2.Guardar();
-                Date desde_date = new SimpleDateFormat("dd/MM/yyyy").parse(lugar2.getDia_inicio().replace("-","/"));
-                Date hasta_date = new SimpleDateFormat("dd/MM/yyyy").parse(lugar2.getDia_final().replace("-","/"));
+                Date desde_date = new SimpleDateFormat("dd/MM/yyyy").parse(lugar2.getDia_inicio().replace("-", "/"));
+                Date hasta_date = new SimpleDateFormat("dd/MM/yyyy").parse(lugar2.getDia_final().replace("-", "/"));
                 long diff = hasta_date.getTime() - desde_date.getTime();
 
                 int dias = (int) (diff / (1000 * 60 * 60 * 24));
@@ -193,7 +193,7 @@ public class Lugar {
                     while (cant > 0) {
                         for (int i = 0; i < lugar2.mesas; i++) {
                             id_mesa++;
-                            Mesas mesa = new Mesas(id_mesa, desde.toString(), hasta.toString(), false, i + 1, dia.toString(),id_lugar);
+                            Mesas mesa = new Mesas(id_mesa, desde.toString(), hasta.toString(), false, i + 1, dia.toString(), id_lugar);
                             mesa.GuardarMuchos();
                         }
                         desde = desde.plusMinutes(lugar2.tiempo_reunion);
@@ -209,6 +209,14 @@ public class Lugar {
                 Tabla.close();
                 res.close();
                 obj.put("Resultset", "true");
+                break;
+            case "BorrarMesa":
+                Tabla.deleteAll(tabla);
+                obj.put("Result", "Mesas borradas");
+                break;
+            case "BorrarLugares":
+                Tabla.deleteAll(tabla);
+                obj.put("Result", "Lugares borrados");
                 break;
         }
         return obj;

@@ -226,15 +226,14 @@ public class Clientes {
                 }
                 obj.put("ResultSet", arr);
                 rs3.close();
+                Tabla.close();
                 break;
             case "save":
                 Gson g4 = new Gson();
                 Clientes cliente4 = g4.fromJson(data, Clientes.class);
-                System.out.println("bandera");
                 cliente4.updateAllCliente(cliente4.getId(), cliente4.getBandera(), cliente4.getContacto(), cliente4.getPais(), cliente4.getMail(), cliente4.getFoto_persona(), cliente4.getLogo());
                 //cliente4.updateAllCliente(cliente4.getId(), cliente4.getBandera(), cliente4.getContacto(), cliente4.getFoto_persona(), cliente4.getPais(), cliente4.getMail());
                 JSONObject line = new JSONObject();
-                line.put("id", "hice algo!!!!!");
                 arr.add(line);
                 break;
             case "getCliente":
@@ -250,6 +249,8 @@ public class Clientes {
                     line5.put("contacto", res5.getString("contacto"));
                     line5.put("pais", res5.getString("pais"));
                     line5.put("mail", res5.getString("mail"));
+                    line5.put("foto_persona", res5.getObject("foto_persona"));
+                    line5.put("logo", res5.getObject("logo"));
                     arr.add(line5);
                     hayDatos2 = true;
                 }
@@ -264,13 +265,17 @@ public class Clientes {
                 res5.close();
                 Tabla.close();
                 break;
+            case "deleteCliente":
+                Tabla.deleteAll(tabla);
+                obj.put("Resultset", "Datos Borrados");
+                break;
         }
         return obj;
     }
 
     public static int insert(int id, String nombre, String usuario, String contrasena, String mail, String contacto) {
         String campos = "id,nombre,contrasena,email,anulado";
-        String valores = (Tabla.UltimoNumero(tabla)+1) + ",'" + nombre + "','" + usuario + "','" + contrasena + "','" + mail + "','" + contacto + "'";
+        String valores = (Tabla.UltimoNumero(tabla) + 1) + ",'" + nombre + "','" + usuario + "','" + contrasena + "','" + mail + "','" + contacto + "'";
         return Tabla.insert(tabla, campos, valores);
     }
 
@@ -284,7 +289,7 @@ public class Clientes {
 
     public static int insertExcel(int id, String nombre, String usuario, String contrasena, String mail, String contacto) {
         String camposExcel = "id,nombre,usuario,contrasena,mail,contacto";
-        String valores = (Tabla.UltimoNumero(tabla)+1) + ",'" + nombre + "','" + usuario + "','" + contrasena + "','" + mail + "','" + contacto + "'";
+        String valores = (Tabla.UltimoNumero(tabla) + 1) + ",'" + nombre + "','" + usuario + "','" + contrasena + "','" + mail + "','" + contacto + "'";
         return Tabla.insert(tabla, camposExcel, valores);
     }
 
