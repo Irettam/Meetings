@@ -169,8 +169,8 @@ public class Lugar {
                 ResultSet res = Lugar.select();
                 Lugar lugar2 = g.fromJson(data, Lugar.class);
                 lugar2.Guardar();
-                Date desde_date = new SimpleDateFormat("dd/MM/yyyy").parse(lugar2.getDia_inicio().replace("-", "/"));
-                Date hasta_date = new SimpleDateFormat("dd/MM/yyyy").parse(lugar2.getDia_final().replace("-", "/"));
+                Date desde_date = new SimpleDateFormat("dd/MM/yyyy").parse(lugar2.getDia_inicio());
+                Date hasta_date = new SimpleDateFormat("dd/MM/yyyy").parse(lugar2.getDia_final());
                 long diff = hasta_date.getTime() - desde_date.getTime();
 
                 int dias = (int) (diff / (1000 * 60 * 60 * 24));
@@ -210,11 +210,50 @@ public class Lugar {
                 res.close();
                 obj.put("Resultset", "true");
                 break;
-            case "BorrarMesa":
-                Tabla.deleteAll(tabla);
+            case "getLugar":
+                boolean hayDatos2 = false;
+                Gson g5 = new Gson();
+                Lugar lugar5 = g5.fromJson(data, Lugar.class);
+                ResultSet res5 = Tabla.select(tabla);
+                while (res5.next()) {
+                    JSONObject line5 = new JSONObject();
+                    line5.put("id", res5.getInt("id"));
+                    line5.put("nombre", res5.getString("nombre"));
+                    line5.put("direccion", res5.getString("direccion"));
+                    line5.put("activo", res5.getBoolean("activo"));
+                    line5.put("mesas", res5.getInt("mesas"));
+                    line5.put("horario_inicio", res5.getString("horario_inicio"));
+                    line5.put("horario_final", res5.getString("horario_final"));
+                    line5.put("tiempo_reunion", res5.getInt("tiempo_reunion"));
+                    line5.put("dia_inicio", res5.getString("dia_inicio"));
+                    line5.put("dia_final", res5.getString("dia_final"));
+                    arr.add(line5);
+                    hayDatos2 = true;
+                }
+                if (hayDatos2) {
+                    obj.put("ResultSet", arr);
+                } else {
+                    JSONObject line5 = new JSONObject();
+                    line5.put("id", "no existe");
+                    arr.add(line5);
+                    obj.put("ResultSet", arr);
+                }
+                res5.close();
+                Tabla.close();
+                break;
+            case "update":
+                Gson g6 = new Gson();
+                Lugar lugar6 = g6.fromJson(data, Lugar.class);
+                Lugar.updateModificado(lugar6.getId(),lugar6.getNombre(),lugar6.getDireccion(),lugar6.getPais());
+                obj.put("Resultset", "Lugar Guardado");
+                break;
+            case "borrarMesa":
+                Tabla.deleteAll("mesas");
                 obj.put("Result", "Mesas borradas");
                 break;
-            case "BorrarLugares":
+            case "borrarLugares":
+                Tabla.deleteAll("Conexiones");
+                Tabla.deleteAll("mesas");
                 Tabla.deleteAll(tabla);
                 obj.put("Result", "Lugares borrados");
                 break;
@@ -235,6 +274,12 @@ public class Lugar {
     public static int updateAll(int id, String nombre, String direccion, String pais, boolean activo, int mesas, String horario_inicio, String horario_final, int tiempo_reunion, String dia_inicio, String dia_final) {
         String campos = "id<>nombre<>direccion<>pais<>activo<>mesas<>horario_inicio<>horario_final<>tiempo_reunion<>dia_inicio<>dia_final";
         String valores = id + "<>'" + nombre + "'<>'" + direccion + "'<>'" + pais + "'<>" + activo + "<>" + mesas + "<>'" + horario_inicio + "'<>'" + horario_final + "'<>" + tiempo_reunion + "<>'" + dia_inicio + "'<>'" + dia_final + "'";
+        return Tabla.updateAll(tabla, id, campos, valores);
+    }
+    
+    public static int updateModificado(int id, String nombre, String direccion, String pais) {
+        String campos = "id<>nombre<>direccion<>pais";
+        String valores = id + "<>'" + nombre + "'<>'" + direccion + "'<>'" + pais + "'";
         return Tabla.updateAll(tabla, id, campos, valores);
     }
 
