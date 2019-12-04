@@ -114,21 +114,53 @@ $.when(conexion("Conexiones", "getAll", obj)).done(function(res) {
 
 $("#place").click(function(event) {
 
+    var create_new = false;
+
     obj["id"] = localStorage.getItem("user");
 
-    $.when(conexion("Clientes", "getCliente", obj)).done(function(res) {
-        console.log(res);
-        $("#dialog_place").fillInputs({ values: res.ResultSet[0] });
+    $.when(conexion("Lugar", "getLugar", obj)).done(function(res) {
+        if (res.ResultSet[0].id != "no existe") {
+            $("#dialog_place").fillInputs({ values: res.ResultSet[0] });
+        } else {
+            create_new = true;
+            $("#dialog_place").find('.form-control').removeAttr('disabled');
+        }
     });
 
     $("#dialog_place").dialog({
         width: 600,
         title: "Place",
         buttons: {
+            "Delete": {
+                id: "btn_delete",
+                text: "Delete Event",
+                class: "btn btn-danger",
+                click: function() {
+                    Swal.fire({
+                        title: 'Are you sure?',
+                        text: "You won't be able to revert this!",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#5cb85c',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Yes, delete it!'
+                    }).then((result) => {
+                        if (result.value) {
+                            $.when(conexion("Lugar", "borrarLugares", obj)).done(function(res) {
+                                Swal.fire(
+                                    'Deleted!',
+                                    'Your file has been deleted.',
+                                    'success'
+                                )
+                            });
+                        }
+                    })
+                }
+            },
             'Save': {
                 text: 'Save',
                 class: 'btn btn-success',
-                id: 'save_profile_dialog'
+                id: 'save_place_dialog'
             }
         },
         close: function(event) {
@@ -136,29 +168,45 @@ $("#place").click(function(event) {
         }
     }).prev(".ui-dialog-titlebar").css("background", "#337ab7");
 
+    $("#btn_delete").removeClass('ui-button');
+
+    $("#save_place_dialog").removeClass('ui-button');
+
     $("#save_place_dialog").unbind().click(function(event) {
-        var obj = $("#dialog_profile").createObject({ registro: localStorage.getItem("user") });
-        console.log(obj);
-        $.when(conexion("Lugar", "save", obj)).done(function(res) {
-            swal("Saved", "Changes Saved", "success");
-        });
+        var obj = $("#dialog_place").createObject({ registro: localStorage.getItem("user") });
+        obj["activo"] = true;
+        if (create_new) {
+            obj["id"] = 1
+            $.when(conexion("Lugar", "save", obj)).done(function(res) {
+                console.log(res);
+                $("#dialog_place").dialog("close");
+            });
+        } else {
+            obj["id"] = $("#id").val();
+            obj["horario_inicio"] = $("#horario_inicio").val();
+            obj["horario_final"] = $("#horario_final").val();
+            $.when(conexion("Lugar", "update", obj)).done(function(res) {
+                Swal.fire(
+                    'Saved!',
+                    'Your Place has been saved',
+                    'success'
+                )
+                $("#dialog_place").dialog("close");
+            });
+        }
     });
+
 });
 
-// $("#test").click(function(event) {
-//  var obj2 = new Object();
-//  obj2["id"] = "5";
-//  obj2["nombre"] = "Lugar raro";
-//  obj2["direccion"] = "algun lugar";
-//  obj2["pais"] = "argentina";
-//  obj2["activo"] = "true";
-//  obj2["mesas"] = "50";
-//  obj2["horario_inicio"] = "15:00:00";
-//  obj2["horario_final"] = "16:00:00";
-//  obj2["tiempo_reunion"] = "15";
-//  obj2["dia_inicio"] = "01-10-2018";
-//  obj2["dia_final"] = "02-10-2018";
-//     $.when(conexion("Lugar", "save", obj2)).done(function(res) {
-//         console.log(res);
-//     });
-// });
+// var obj2 = new Object();
+// obj2["id"] = "5";
+// obj2["nombre"] = "Lugar raro";
+// obj2["direccion"] = "algun lugar";
+// obj2["pais"] = "argentina";
+// obj2["activo"] = "true";
+// obj2["mesas"] = "50";
+// obj2["horario_inicio"] = "15:00:00";
+// obj2["horario_final"] = "16:00:00";
+// obj2["tiempo_reunion"] = "15";
+// obj2["dia_inicio"] = "01-10-2018";
+// obj2["dia_final"] = "02-10-2018";

@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <title>Meetings</title>
-    <link rel="stylesheet" href="../front-end/bower_components/sweetalert2-master/dist/sweetalert2.min.css">
+    <link href="../front-end/css/dark.css" rel="stylesheet">
     <!-- Bootstrap Core CSS -->
     <link href="../front-end/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- MetisMenu CSS -->
@@ -180,7 +180,7 @@
             <tr>
                 <td>Name: </td>
                 <td>
-                    <input id="Enterprise_id_profile" style="display: none;" type="text">
+                    <input id="id" style="display: none;" type="text">
                     <input id="nombre" style="width: 13cm;" class="form-control" type="Text" value="">
                 </td>
             </tr>
@@ -440,6 +440,30 @@
                     </select>
                 </td>
             </tr>
+            <tr>
+                <td>Starting Date:</td>
+                <td><input id="dia_inicio" style="width: 13cm;" class="form-control" type="date" value="" disabled="disabled"></td>
+            </tr>
+            <tr>
+                <td>Ending Date:</td>
+                <td><input id="dia_final" style="width: 13cm;" class="form-control" type="date" value="" disabled="disabled"></td>
+            </tr>
+            <tr>
+                <td>Starting Time:</td>
+                <td><input id="horario_inicio" style="width: 13cm;" class="form-control" type="time" value="" disabled="disabled"></td>
+            </tr>
+            <tr>
+                <td>Ending Time:</td>
+                <td><input id="horario_final" style="width: 13cm;" class="form-control" type="time" value="" disabled="disabled"></td>
+            </tr>
+            <tr>
+                <td>Tables Quantity:</td>
+                <td><input id="mesas" style="width: 13cm;" class="form-control" type="number" value="" disabled="disabled"></td>
+            </tr>
+            <tr>
+                <td>Meeting duration (min):</td>
+                <td><input id="tiempo_reunion" style="width: 13cm;" class="form-control" type="number" value="" disabled="disabled"></td>
+            </tr>
         </table>
     </div>
     <!-- /#wrapper -->
@@ -451,8 +475,11 @@
     <script src="../front-end/bower_components/metisMenu/dist/metisMenu.min.js"></script>
     <!-- Custom Theme JavaScript -->
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
     <script src="sb-admin-2.js"></script>
     <script src="functions.js"></script>
     <script src="plugins.js"></script>
     <script src="index_users.js"></script>
-    <script src=../front-end/bower_components/sweetalert2-master/dist/sweetalert2.min.js> </script> </body> </html>
+</body>
+
+</html>

@@ -179,6 +179,29 @@ function create_tr_with_id(id) {
     };
 }(jQuery));
 
+function fix_date_html(date, debeGuardar) {
+    if (debeGuardar != undefined) {
+        var fecha = date.split('-');
+        if (fecha.includes("undefined") || date == "") {
+            return "00/00/00";
+        } else {
+            return fecha[2] + "/" + fecha[1] + '/' + fecha[0];
+        }
+    } else {
+        if (date != '00/00/00' && date != '00-00-00' && date != "") {
+            var fecha = date.split('-');
+            return fecha[2] + "/" + fecha[1] + '/' + fecha[0];
+        } else {
+            return date;
+        }
+    }
+}
+
+function fix_time_html(hora) {
+    var time = hora + ':00';
+    return time;
+}
+
 var cntrlIsPressed = false;
 var shiftIsPressed = false;
 var comIsPressed = false;
