@@ -21,7 +21,7 @@ public class Excel {
 
     public static void LeerExcel() {
         String nombreArchivo = "ClientesSistemaMeetings.xlsx";
-        String rutaArchivo = "C:\\" + nombreArchivo;
+        String rutaArchivo = "/home/" + nombreArchivo;
         String hoja = "Hoja1";
 
         try (FileInputStream file = new FileInputStream(new File(rutaArchivo))) {

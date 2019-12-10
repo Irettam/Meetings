@@ -48,7 +48,7 @@ public class Web_Settings {
     public Web_Settings() throws FileNotFoundException, IOException {
 
         String cadena;
-        String ruta = "C:\\Users\\Antonio\\Desktop\\Meetings\\src\\java\\db\\webconfig.txt";
+        String ruta = "/home/webconfig.txt";
         File archivo = new File(ruta);
         FileReader f = new FileReader(archivo);
         BufferedReader b = new BufferedReader(f);
